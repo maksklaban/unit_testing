@@ -13,6 +13,16 @@ struct SignalsBuffer {
     _signals.insert(_signals.end(), signals.begin(), signals.end());
   }
 
+  ~SignalsBuffer() {
+    try {
+      flush();
+    } catch (std::exception&) {
+      // LOG ERROR
+    } catch (...) {
+      // LOG ERROR
+    }
+  }
+
   void flush() {
     if (_signals.empty()) {
       return;

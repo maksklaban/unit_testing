@@ -4,6 +4,16 @@ SignalsBuffer::SignalsBuffer(std::unique_ptr<SignalsConsumer> consumer)
 : _consumer(std::move(consumer))
 {}
 
+SignalsBuffer::~SignalsBuffer() {
+  try {
+    flush();
+  } catch (std::exception&) {
+    // LOG ERROR
+  } catch (...) {
+    // LOG ERROR
+  }
+}
+
 void SignalsBuffer::accumulate(const std::vector<Signal>& signals) {
   _signals.reserve(_signals.size() + signals.size());
   _signals.insert(_signals.end(), signals.begin(), signals.end());

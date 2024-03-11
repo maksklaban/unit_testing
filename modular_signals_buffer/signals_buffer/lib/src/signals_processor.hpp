@@ -7,6 +7,7 @@
 
 struct SignalsBuffer {
   SignalsBuffer(std::unique_ptr<SignalsConsumer> consumer);
+  ~SignalsBuffer();
 
   void accumulate(const std::vector<Signal>& signals);
   void flush();

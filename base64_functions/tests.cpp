@@ -39,4 +39,7 @@ TEST(Base64, BasicFlow) {
 
   EXPECT_EQ(rest2_reference, rest2_encoded);
   EXPECT_EQ(rest2_original, rest2_decoded);
+
+  EXPECT_EQ("", base64_decode(""));
+  EXPECT_EQ("", base64_encode(""));
 }
