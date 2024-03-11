@@ -23,6 +23,7 @@ TEST(SignalsBuffer, BasicFlow) {
     {"key2", "val2", 222222},
     {"key3", "val3", 333333}
   };
+  // Double flush
   {
     SignalsBuffer processor(std::make_unique<TestSignalsConsumer>());
     TestSignalsConsumer::_expected_signals = test_signals;
@@ -31,6 +32,7 @@ TEST(SignalsBuffer, BasicFlow) {
     ASSERT_NO_THROW(processor.accumulate(test_signals));
     ASSERT_NO_THROW(processor.flush());
   }
+  // Empty vector
   {
     SignalsBuffer processor(std::make_unique<TestSignalsConsumer>());
     TestSignalsConsumer::_expected_signals = {};
@@ -38,6 +40,7 @@ TEST(SignalsBuffer, BasicFlow) {
     ASSERT_NO_THROW(processor.accumulate({}));
     ASSERT_NO_THROW(processor.flush());
   }
+  // Double accumulate
   {
     SignalsBuffer processor(std::make_unique<TestSignalsConsumer>());
     auto expected_signals = test_signals;
